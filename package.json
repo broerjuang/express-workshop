@@ -5,7 +5,7 @@
   "description": "blabla",
   "main": "lib/main.js",
   "scripts": {
-    "start": "nodemon src/main.js --exec babel-node  --presets es2015-native-generators,stage-2",
+    "start": "nodemon src/main.js --exec babel-node",
     "build": "babel src --ignore \"_*\" --out-dir lib",
     "format": "prettier-eslint --write \"src/**/*.js\"",
     "lint": "eslint . --max-warnings 0",

@@ -5,10 +5,15 @@ import {
   loginController,
 } from '../controllers/authControllers';
 
+import {getAllUsers} from '../controllers/usersController';
+
 let mainRoutes = Router();
 
-//aut
+//auth
 mainRoutes.post('/auth/signup', signupController);
 mainRoutes.post('/auth/login', loginController);
+
+//users
+mainRoutes.get('/users', getAllUsers);
 
 export default mainRoutes;

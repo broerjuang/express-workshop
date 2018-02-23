@@ -29,6 +29,7 @@ type ExtReqLogin = {
 
 export async function signupController(req: ExtReq, res: Res) {
   let {name, email, password, passwordConfirm} = req.body;
+  console.log(req.body);
   if (
     name === 'undefined' ||
     email === 'undefined' ||
@@ -74,41 +75,20 @@ export async function signupController(req: ExtReq, res: Res) {
 
 export async function loginController(req: ExtReqLogin, res: Res) {
   let {email, password} = req.body;
-  let hashedPassword = bcrypt.hashSync(password, SALT);
-  // TODO: make try catch
-  // try {
-  //   let user = await User.findOne({email});
-  //   if (hashedPassword !== user.password) {
-  //   }
-  // } catch (err) {
-  //   res.status(400).json({
-  //     status: 'BAD',
-  //     message: 'BAD REQUEST',
-  //   });
-  // }
-  User.findOne({email: email}, (err, user) => {
-    if (err) {
-      res.status(400).json({
-        status: 'BAD',
-        message: 'ERROR',
-      });
-    }
+  try {
+    let user = await User.findOne({email: email});
+    console.log(user);
+    let isMatch = bcrypt.compareSync(password, user.password);
     let token = jwt.sign({data: user._id}, SECRET, {expiresIn: 10000});
-    if (hashedPassword !== user.password) {
-      console.log('hashed', hashedPassword);
-      console.log('not hashed', user.password);
-      res.status(400).json({
-        status: 'BAD',
-        message: 'password does not match',
-      });
-    } else {
+    if (isMatch) {
       res.status(200).json({
         status: 'OK',
-        message: 'password match',
         token,
       });
+    } else {
+      throw new Error("Password doesn't match");
     }
-  });
+  } catch (err) {
+    res.status(400).send(err);
+  }
 }
-
-function findUserByPassword(password: string) {}
