@@ -14,8 +14,13 @@
     "test": "npm run lint && npm run typecheck && npm run test-src"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "node-fetch": "^2.0.0"
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.6",
+    "node-fetch": "^2.0.0",
+    "node-gyp": "^3.6.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
