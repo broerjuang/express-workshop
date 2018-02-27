@@ -1,9 +1,9 @@
-// @flow
 import {Router} from 'express';
 import {
   signupController,
   loginController,
 } from '../controllers/authControllers';
+import {isAuthenticated} from '../middlewares/authMiddleware';
 
 import {getAllUsers} from '../controllers/usersController';
 
@@ -14,6 +14,6 @@ mainRoutes.post('/auth/signup', signupController);
 mainRoutes.post('/auth/login', loginController);
 
 //users
-mainRoutes.get('/users', getAllUsers);
+mainRoutes.get('/users', isAuthenticated, getAllUsers);
 
 export default mainRoutes;
