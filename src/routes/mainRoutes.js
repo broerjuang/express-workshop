@@ -3,7 +3,7 @@ import {
   signupController,
   loginController,
 } from '../controllers/authControllers';
-import {isAuthenticated} from '../middlewares/authMiddleware';
+import isAuthenticated from '../middlewares/isAuthenticated';
 
 import {getAllUsers} from '../controllers/usersController';
 

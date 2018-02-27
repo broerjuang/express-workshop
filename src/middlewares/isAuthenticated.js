@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import {SECRET} from '../globals/config';
 
-export function isAuthenticated(req, res, next) {
+export default function isAuthenticated(req, res, next) {
   try {
     let token = req.get('x-token');
     let decoded = jwt.verify(token, SECRET, {maxAge: 10000});
